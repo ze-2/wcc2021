@@ -1,127 +1,103 @@
-<!doctype html>
-<html lang="en">
+{% extends "indexLayout.html" %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../static/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
-        integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+{% block title %}
+Welcome | Doc-on
+{% endblock %}
 
-<body>
-    <nav class="navbar fixed-top navbar-light bg-light">
-        <div class="container-fluid mx-4">
-            <a class="navbar-brand" href="#">Doc-On</a>
-            <form class="d-flex">
-                <a class="btn btn-outline-primary mx-3" href="{{ url_for('login') }}">Login</a>
-                <a class="btn btn-primary" href="{{ url_for('signup') }}">Sign Up</a>
-            </form>
+{% block body %}
+<section class="min-vh-100 d-flex align-items-center justify-content-center py-3">
+    <div class="px-4 py-5 my-5 text-center">
+        <div class="icon d-block mx-auto mb-4 ">
+            <i class="fa fa-user-md fa-5x"></i>
         </div>
-    </nav>
-
-    <section class="min-vh-100 d-flex align-items-center justify-content-center py-3">
-        <div class="px-4 py-5 my-5 text-center">
-            <div class="icon d-block mx-auto mb-4 ">
-                <i class="fa fa-user-md fa-5x"></i>
-            </div>
-            <h1 class="display-5 fw-bold">Connecting patients <br>with doctors.</h1>
-            <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4">Ease your healthcare concerns with us. Using state-of-the-art revolutionary AI,
-                    we help users predict their health and connect them with the best doctors in their area.
+        <h1 class="display-5 fw-bold">Connecting patients <br>with doctors.</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Ease your healthcare concerns with us. Using state-of-the-art revolutionary AI,
+                we help users predict their health and connect them with the best doctors in their area.
+            </p>
+            <a class="btn btn-primary d-inline-flex flex-row align-items-center" href="{{ url_for('signup') }}">
+                Get started now
+                <i class="ms-2 fa fa-arrow-right fa-1x"></i>
+            </a>
+        </div>
+        <div class="mx-auto my-5">
+            <p class="lead mb-4">Not convinced? Continue reading to learn more about us. </p>
+            <i class="fa fa-chevron-down fa-2x"></i>
+        </div>
+    </div>
+</section>
+<section class="pt-6 pb-7" id="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center">
+                <h2 class="heading-black">We have everything patients and doctors will need.</h2>
+                <p class="text-muted lead"><em>Stop</em> worrying about your healthcare.
+                    <em>Drop</em> all your concerns and let us handle it for you.
+                    <em>Vote</em> for the best doctors.
                 </p>
-                <a class="btn btn-primary d-inline-flex flex-row align-items-center" href="{{ url_for('signup') }}">
-                    Get started now
-                    <i class="ms-2 fa fa-arrow-right fa-1x"></i>
-                </a>
-            </div>
-            <div class="mx-auto my-5">
-                <p class="lead mb-4">Not convinced? Continue reading to learn more about us. </p>
-                <i class="fa fa-chevron-down fa-2x"></i>
             </div>
         </div>
-    </section>
-    <section class="pt-6 pb-7" id="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mx-auto text-center">
-                    <h2 class="heading-black">We have everything patients and doctors will need.</h2>
-                    <p class="text-muted lead"><em>Stop</em> worrying about your healthcare.
-                        <em>Drop</em> all your concerns and let us handle it for you.
-                        <em>Vote</em> for the best doctors.
-                    </p>
-                </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col-md-10 mx-auto">
-                    <div class="row feature-boxes">
-                        <div class="col-md-6 box py-3">
-                            <div class="text-center">
-                                <i class="fas fa-robot fa-2x py-3"></i>
-                                <h5 class="text-primary">Smart AI chatbot</h5>
-                                <p class="text-muted">Our user-friendly chatbot will use artifical intelligence
-                                    to predict the health of your patients and provide an accurate diagnosis.
-                                </p>
-                            </div>
+        <div class="row mt-5">
+            <div class="col-md-10 mx-auto">
+                <div class="row feature-boxes">
+                    <div class="col-md-6 box py-3">
+                        <div class="text-center">
+                            <i class="fas fa-robot fa-2x py-3"></i>
+                            <h5 class="text-primary">Smart AI chatbot</h5>
+                            <p class="text-muted">Our user-friendly chatbot will use artifical intelligence
+                                to predict the health of your patients and provide an accurate diagnosis.
+                            </p>
                         </div>
-                        <div class="col-md-6 box py-3">
-                            <div class="text-center">
-                                <i class="fa fa-ambulance fa-2x py-3"></i>
-                                <h5 class="text-info">Connection</h5>
-                                <p class="text-muted">We provide a platform for patients and doctors to connect,
-                                    ensuring that everyone gets the best healthcare possible.
-                                </p>
-                            </div>
+                    </div>
+                    <div class="col-md-6 box py-3">
+                        <div class="text-center">
+                            <i class="fa fa-ambulance fa-2x py-3"></i>
+                            <h5 class="text-info">Connection</h5>
+                            <p class="text-muted">We provide a platform for patients and doctors to connect,
+                                ensuring that everyone gets the best healthcare possible.
+                            </p>
                         </div>
-                        <div class="col-md-6 box py-3">
-                            <div class="text-center">
-                                <i class="fa fa-globe fa-2x py-3"></i>
-                                <h5 class="text-success">Accessible</h5>
-                                <p class="text-muted">We're available globally, so everyone in the
-                                    world can
-                                    have access to our services.
-                                </p>
-                            </div>
+                    </div>
+                    <div class="col-md-6 box py-3">
+                        <div class="text-center">
+                            <i class="fa fa-globe fa-2x py-3"></i>
+                            <h5 class="text-success">Accessible</h5>
+                            <p class="text-muted">We're available globally, so everyone in the
+                                world can
+                                have access to our services.
+                            </p>
                         </div>
-                        <div class="col-md-6 box py-3">
-                            <div class="text-center">
-                                <i class="fa fa-users fa-2x py-3"></i>
-                                <h5 class="text-primary">Voting system</h5>
-                                <p class="text-muted">We have a voting system so users can verify
-                                    if their doctors are legitimate, ensuring ease of mind.
-                                </p>
-                            </div>
+                    </div>
+                    <div class="col-md-6 box py-3">
+                        <div class="text-center">
+                            <i class="fa fa-users fa-2x py-3"></i>
+                            <h5 class="text-primary">Voting system</h5>
+                            <p class="text-muted">We have a voting system so users can verify
+                                if their doctors are legitimate, ensuring ease of mind.
+                            </p>
                         </div>
-                        <div class="col-md-6 box py-3">
-                            <div class="text-center">
-                                <i class="fa fa-laptop fa-2x py-3"></i>
-                                <h5 class="text-primary">User-friendly</h5>
-                                <p class="text-muted"> Our beautiful, responsive and
-                                    easy-to-use interface will provide a pleasant experience for everyone.
-                                </p>
-                            </div>
+                    </div>
+                    <div class="col-md-6 box py-3">
+                        <div class="text-center">
+                            <i class="fa fa-laptop fa-2x py-3"></i>
+                            <h5 class="text-primary">User-friendly</h5>
+                            <p class="text-muted"> Our beautiful, responsive and
+                                easy-to-use interface will provide a pleasant experience for everyone.
+                            </p>
                         </div>
-                        <div class="col-md-6 box py-3">
-                            <div class="text-center">
-                                <i class="fa fa-medkit fa-2x py-3"></i>
-                                <h5 class="text-success">Personalized experience</h5>
-                                <p class="text-muted"> Whether you're a doctor or a patient, we provide the ultimate
-                                    healthcare platform for you.
-                                </p>
-                            </div>
+                    </div>
+                    <div class="col-md-6 box py-3">
+                        <div class="text-center">
+                            <i class="fa fa-medkit fa-2x py-3"></i>
+                            <h5 class="text-success">Personalized experience</h5>
+                            <p class="text-muted"> Whether you're a doctor or a patient, we provide the ultimate
+                                healthcare platform for you.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
-
-</body>
-
-</html>
+    </div>
+</section>
+{% endblock %}

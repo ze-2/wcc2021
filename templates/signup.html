@@ -1,0 +1,59 @@
+{% extends "indexLayout.html" %}
+
+{% block title %}
+Sign Up | Doc-on
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/signup.css">
+{% endblock %}
+
+{% block body %}
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        <div class="card login-card">
+            <div class="card-body px-5 py-5">
+                <h1>Sign up</h1>
+                <h4 class="text-muted">Sign up for an account to continue.</h4>
+                <form action="/signup" method="post" class="py-4">
+                    <div class="form-group py-2">
+                        <label for="username" class="sr-only">Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Username" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="email" class="sr-only">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Email"
+                            required>
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" name="password" id="password" class="form-control"
+                            placeholder="Password" required>
+                    </div>
+
+                    <fieldset class="form-group">
+                        <legend class="mt-1">Are you a patient or doctor?</legend>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="options"
+                                    value="patient" checked="">
+                                Patient
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="options"
+                                    value="doctor">
+                                Doctor
+                            </label>
+                        </div>
+                    </fieldset>
+                    <input name="signup" class="btn btn-primary btn-block my-4" type="submit" value="Sign Up">
+                </form>
+                <p class="login-card-footer-text">Already have an account? <a href="{{ url_for('login') }}">Login
+                        here.</a></p>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

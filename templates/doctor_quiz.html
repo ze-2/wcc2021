@@ -1,0 +1,54 @@
+{% extends "quizLayout.html" %}
+
+{% block head %}
+Doctor details | Doc-on
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="../static/doctorquiz.css">
+{% endblock %}
+{% block body %}
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        <div class="card login-card">
+            <div class="card-body px-5 py-5">
+                <h1>More information</h1>
+                <h4 class="text-muted">Please fill in the fields below for a better experience.</h4>
+                <form action="/quiz" method="post" class="py-4">
+                    <div class="form-group py-2">
+                        <label for="location" class="sr-only">Location</label>
+                        <input type="text" id="location" name="location" class="form-control" placeholder="Location" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="age" class="sr-only">Age</label>
+                        <input type="number" id="age" name="age" class="form-control" placeholder="Age" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="school" class="sr-only">School</label>
+                        <input type="text" id="school" name="school" class="form-control" placeholder="School" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="gender" class="sr-only">Gender</label>
+                        <select class="form-control" id="gender">
+                            <option name="gender" value="female">Female</option>
+                            <option name="gender" value="male">Male</option>
+                            <option name="gender" value="others">Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="education" class="sr-only">Education level</label>
+                        <select class="form-control" id="education">
+                            <option name="education" value="hs">High School</option>
+                            <option name="education" value="vc">Vocational qualification</option>
+                            <option name="education" value="bsc">Bachelor's degree</option>
+                            <option name="education" value="msc">Master's degree</option>
+                            <option name="education" value="phd">Doctorate or higher</option>
+                        </select>
+                    </div>
+
+                    <input name="submit" class="btn btn-primary btn-block my-4" type="submit" value="Submit!">
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
