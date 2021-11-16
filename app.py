@@ -2,8 +2,6 @@ from flask import Flask, flash, redirect, request, render_template, url_for, ses
 from flask_sslify import SSLify
 import secrets
 
-from markupsafe import re
-
 # Setup
 app = Flask(__name__, static_url_path='/static')
 sslify = SSLify(app)
