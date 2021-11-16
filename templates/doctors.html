@@ -1,0 +1,48 @@
+{% extends "userLayout.html" %}
+
+{% block title %}
+Doctors | Doc-on
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/cards.css">
+{% endblock %}
+
+{% block body %}
+<form action="/doctors" method="post" class="d-flex pt-5 px-5 align-items-center">
+    <input class="form-control me-sm-2" type="text" name="search" placeholder="Search" value="{{ search }}">
+    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+</form>
+<div class="row m-4" data-masonry='{"percentPosition": true }'>
+    {% for doctor in doctors %}
+    <div class="col-sm-6 col-lg-4 mb-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="card-text"><mark>{{ doctor.name }}</mark>is a {{doctor.age}} year-old doctor in
+                    <strong>{{ doctor.location }}.</strong></h3>
+                {% if doctor.gender == "male" %}
+                <p class="card-text">He graduated with a {{ doctor.education }} qualification from {{ doctor.school }}.
+                </p>
+                {% elif doctor.gender == "female" %}
+                <p class="card-text">She graduated with a {{ doctor.education }} qualification from {{ doctor.school }}.
+                </p>
+                {% else %}
+                <p class="card-text">They graduated with a {{ doctor.education }} qualification from
+                    {{ doctor.school }}.
+                </p>
+                {% endif %}
+                <p class="card-text">Skills:</p>
+                <ul>
+                    {% for skill in doctor.skills %}
+                    <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+                {% if doctor.add %}
+                <p class="card-text">Additional info:<br>{{ doctor.add }}</p>
+                {% endif %}
+                <a type="button" class="btn btn-primary" href="mailto:{{doctor.email}}">Contact</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endblock %}

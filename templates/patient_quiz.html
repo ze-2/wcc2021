@@ -17,8 +17,13 @@ User details | Doc-on
                 <h4 class="text-muted">Please fill in the fields below for a better experience.</h4>
                 <form action="/quiz" method="post" class="py-4">
                     <div class="form-group py-2">
+                        <label for="name" class="sr-only">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Name" required>
+                    </div>
+                    <div class="form-group py-2">
                         <label for="location" class="sr-only">Location</label>
-                        <input type="text" id="location" name="location" class="form-control" placeholder="Location" required>
+                        <input type="text" id="location" name="location" class="form-control" placeholder="Location"
+                            required>
                     </div>
                     <div class="form-group py-2">
                         <label for="age" class="sr-only">Age</label>
@@ -32,7 +37,6 @@ User details | Doc-on
                             <option name="gender" value="others">Others</option>
                         </select>
                     </div>
-
                     <input name="submit" class="btn btn-primary btn-block my-4" type="submit" value="Submit!">
                 </form>
             </div>
