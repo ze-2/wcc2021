@@ -30,7 +30,9 @@ def login():
 
         if check:
             if type == "doctor":
-                # Pull from db if the user has confirmed details - False if they haven't took the extra quiz
+                # Pull from db if the user has confirmed details
+
+                # Set the cookie to False if they haven't took the quiz
                 session['details'] = False
 
                 # Set cookies, log in as doctor
@@ -40,7 +42,9 @@ def login():
                 flash('You are now logged in as a doctor.', 'alert alert-dismissible alert-success')
                 return redirect(url_for('doctor'))
             else:
-                # Pull from db if the user has confirmed details - False if they haven't took the extra quiz
+                # Pull from db if the user has confirmed details
+
+                # Set the cookie to False if they haven't took the quiz
                 session['details'] = False
 
                 # Set cookies, log in as patient
@@ -136,24 +140,34 @@ def quiz():
         if session.get('type') == "doctor":
             username = session.get('username')
 
+            name = request.form['name']
             location = request.form['location']
             school = request.form['school']
             age = request.form['age']
             gender = request.form['gender']
+            add = request.form['add']
 
-            skills = request.form['skills']
+            skills_unparsed = request.form['skills']
+            # Parse array for db - not very sure if this works, but it should be an array now
+            skills = skills_unparsed.split(",")
+
+            # For this I'll need you to store the results in full form - parse it
+            # Refer to doctor_quiz page for the values and what they correspond with
             education = request.form['education']
 
+            # Update db to say that they've filled in the quiz
             session['details'] = True
 
             flash('Thank you!', 'alert alert-dismissible alert-success')
             return redirect(url_for('doctor'))
         else:
             username = session.get('username')
+            name = request.form['name']
             location = request.form['location']
             age = request.form['age']
             gender = request.form['gender']
 
+            # Update db to say that they've filled in the quiz
             session['details'] = True
 
             flash('Thank you!', 'alert alert-dismissible alert-success')
@@ -186,25 +200,100 @@ doctors =[
     'email': 'smith@email.com',
     'location': 'tokyo',
     'school': 'school A',
-    'education': 'msc',
-    'age': 25,
-    'gender': 'male',
-    'skills': ['neurologist']
+    'education': "Master's" OR "Doctorate's / Higher" OR "Bachelor's" OR "High School" OR "Vocational"
+    'age': '25',
+    'gender': 'male', OR 'female' OR 'others'
+    'skills': ['neurologist'],
+    'likes': '4',
+    'dislikes' : '0'
 },{
-    'name': 'Dr. Jones',
-    'email': 'jones@email.com',
-    'location': 'malaysia',
-    'school': 'schoolB',
-    'education': 'phd',
-    'age': 25,
-    'gender': 'male',
-    'skills': ['general practitioner', 'allergist']
+    (second and other entries in the format above)
 }
 ]"""
+
+
 @app.route('/doctors', methods=['GET', 'POST'])
 def doctors():
-    # Need to get doctors from db here in the format above
-    return render_template('doctors.html')
+    if request.method == 'POST':
+        search = request.form['search']
+        # Get the doctors from the db where criteria meets search
+        # Filler
+        doctors =[{
+        'name': 'Dr. Smith',
+        'email': 'smith@email.com',
+        'location': 'Tokyo',
+        'school': 'school A',
+        'education': "Master's",
+        'age': '25',
+        'gender': 'male',
+        'skills': ['neurologist'],
+            'add' : 'additional info they handed up',
+
+        'likes': '4',
+        'dislikes' : '0'}]
+
+        return render_template('doctors.html', doctors=doctors, search=search)
+    else:
+        # Filler for now
+        doctors =[{
+        'name': 'Dr. Smith',
+        'email': 'smith@email.com',
+        'location': 'Tokyo',
+        'school': 'school A',
+        'education': "Master's",
+        'age': '25',
+        'gender': 'male',
+        'skills': ['neurologist'],
+            'add' : 'additional info they handed up',
+
+        'likes': '4',
+        'dislikes' : '0'
+    },{
+        'name': 'Dr. Jones',
+        'email': 'jones@email.com',
+        'location': 'Malaysia',
+        'school': 'schoolB',
+        'education': "Doctorate's",
+        'age': '25',
+        'gender': 'others',
+        'skills': ['general practitioner', 'allergist'],
+        'likes': '1000',
+        'dislikes' : '20'
+    },{
+        'name': 'Dr. Jane',
+        'email': 'jane@email.com',
+        'location': 'Singapore',
+        'school': 'school C',
+        'education': "Bachelor's",
+        'age': '25',
+        'gender': 'female',
+        'skills': ['general practitioner', 'nutrition', 'cancer'],
+        'likes': '90',
+        'add' : 'whatever they wanna add',
+        'dislikes' : '1'
+    }]
+        return render_template('doctors.html', doctors=doctors)
+
+@app.route('/patients', methods=['GET', 'POST'])
+def patients():
+    # Filler for now
+    patients = [{
+    'name': 'John',
+    'email': 'john@email.com',
+    'location': 'tokyo',
+    'age': '25',
+    'gender': 'male',
+    'diseases': [{'common flu': '90', 'cancer': '30'}]
+},{
+    'name': 'Jane',
+    'email': 'doe@email.com',
+    'location': 'malaysia',
+    'age': '70',
+    'gender': 'female',
+    'diseases': [{'stroke': '90', 'diabetes (type 2)': '30'}]
+}]
+    # Need to get patients from db here in the format above
+    return render_template('patients.html', patients=patients)
 
 
 @app.route('/logout')
