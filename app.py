@@ -23,7 +23,7 @@ def login():
         # Get the user's type (doctor or patient here) and redirect to the appropriate page
 
         # Filler for now
-        type = "doctor"
+        type = "patient"
 
         # Check if details match
         check = True
@@ -166,6 +166,7 @@ def quiz():
             location = request.form['location']
             age = request.form['age']
             gender = request.form['gender']
+            add = request.form['add']
 
             # Update db to say that they've filled in the quiz
             session['details'] = True
@@ -205,7 +206,8 @@ doctors =[
     'gender': 'male', OR 'female' OR 'others'
     'skills': ['neurologist'],
     'likes': '4',
-    'dislikes' : '0'
+    'dislikes' : '0',
+    'add' : 'any additional info they sent' (optional)
 },{
     (second and other entries in the format above)
 }
@@ -227,8 +229,7 @@ def doctors():
         'age': '25',
         'gender': 'male',
         'skills': ['neurologist'],
-            'add' : 'additional info they handed up',
-
+        'add' : 'additional info they handed up',
         'likes': '4',
         'dislikes' : '0'}]
 
@@ -276,24 +277,43 @@ def doctors():
 
 @app.route('/patients', methods=['GET', 'POST'])
 def patients():
+    if request.method == 'POST':
+        search = request.form['search']
+        # Get the doctors from the db where criteria meets search
+        # Filler
+
+        patients =[{
+        'name': 'John',
+        'email': 'john@email.com',
+        'location': 'tokyo',
+        'age': '25',
+        'gender': 'male',
+        'diseases': {'common flu': '90', 'cancer': '30'},
+        'add' : 'whatever they wanna add'
+        }]
+
+        return render_template('patients.html', patients=patients, search=search)
+    else:
     # Filler for now
-    patients = [{
-    'name': 'John',
-    'email': 'john@email.com',
-    'location': 'tokyo',
-    'age': '25',
-    'gender': 'male',
-    'diseases': [{'common flu': '90', 'cancer': '30'}]
-},{
-    'name': 'Jane',
-    'email': 'doe@email.com',
-    'location': 'malaysia',
-    'age': '70',
-    'gender': 'female',
-    'diseases': [{'stroke': '90', 'diabetes (type 2)': '30'}]
-}]
-    # Need to get patients from db here in the format above
-    return render_template('patients.html', patients=patients)
+        patients = [{
+        'name': 'John',
+        'email': 'john@email.com',
+        'location': 'tokyo',
+        'age': '25',
+        'gender': 'male',
+        'diseases': {'common flu': '90', 'cancer': '30'},
+        'add' : 'whatever they wanna add'
+    },{
+        'name': 'Jane',
+        'email': 'doe@email.com',
+        'location': 'malaysia',
+        'age': '70',
+        'gender': 'female',
+        'diseases': {'stroke': '90', 'diabetes (type 2)': '30'},
+        'add' : 'some extra stuff here (optional)'
+    }]
+        # Need to get patients from db here in the format above
+        return render_template('patients.html', patients=patients)
 
 
 @app.route('/logout')
