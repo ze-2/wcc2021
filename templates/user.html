@@ -4,5 +4,47 @@
 Home | Doc-on
 {% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="../static/user.css">
+{% endblock %}
+
 {% block body %}
+<section class="min-vh-100 d-flex align-items-center pt-3 px-2">
+    <div class="col-sm-6 col-lg-4 mb-4 mx-auto px-2">
+        <div class="icon d-block mx-auto mb-4 ">
+            <i class="fas fa-user fa-5x"></i>
+        </div>
+        <h1 class="display-5 fw-bold">Welcome, {{ username }}</h1>
+        <div class="col-lg-6">
+            <p class="lead">How are you feeling today?</p>
+            <a class="btn btn-primary d-inline-flex flex-row align-items-center" href="{{ url_for('evaluate') }}">
+                Take the quiz now!
+                <i class="ms-2 fa fa-arrow-right fa-1x"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-4 mb-4 mx-auto px-2">
+        <div class="card text-center">
+            <div class="card-body">
+                <h1>Your details:</h1>
+                <h4>Name: {{ patient.name }}</h4>
+                <h4>Age: {{patient.age}}</h4>
+                <h4>Location: {{ patient.location }}</h4>
+                <h4>Gender: {{patient.gender}} </h4>
+                <h5>Diseases:</h5>
+                <ul>
+                    {% for disease, prob in patient.diseases.items() %}
+                    <li>{{ disease }} with a {{ prob }}% chance</li>
+                    {% endfor %}
+                </ul>
+                {% if patient.add %}
+                <p class="card-text">Additional info:<br>{{ patient.add }}</p>
+                {% endif %}
+                <p class="card-text">Disclaimer: this is NOT meant to be an official diagnosis.</p>
+                <p class="card-text">Email: {{patient.email}}</p>
+                <a type="button" class="btn btn-primary" href="{{ url_for('quiz') }}">Wrong details?</a>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

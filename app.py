@@ -45,7 +45,7 @@ def login():
                 # Pull from db if the user has confirmed details
 
                 # Set the cookie to False if they haven't took the quiz
-                session['details'] = False
+                session['details'] = True
 
                 # Set cookies, log in as patient
                 session['username'] = username
@@ -97,7 +97,17 @@ def user():
         username = session['username']
         if session.get('type') == "patient":
             if session.get('details'):
-                return render_template('user.html', username=username)
+                # Get patient details from db
+                patient ={
+                    'name': 'John',
+                    'email': 'john@email.com',
+                    'location': 'tokyo',
+                    'age': '25',
+                    'gender': 'male',
+                    'diseases': {'common flu': '90', 'cancer': '30'},
+                    'add' : 'whatever they wanna add'
+                    }
+                return render_template('user.html', username=username, patient=patient)
             else:
                 # They haven't filled in the quiz
                 return redirect(url_for('quiz'))
@@ -119,7 +129,19 @@ def doctor():
         username = session['username']
         if session.get('type') == "doctor":
             if session.get('details'):
-                return render_template('doctor.html', username=username)
+                doctor = {
+                    'name': 'Dr. Smith',
+                    'email': 'smith@email.com',
+                    'location': 'Tokyo',
+                    'school': 'school A',
+                    'education': "Master's",
+                    'age': '25',
+                    'gender': 'male',
+                    'skills': ['neurologist'],
+                    'add' : 'additional info they handed up',
+                    'likes': '4',
+                    'dislikes' : '0'}
+                return render_template('doctor.html', doctor=doctor, username=username)
             else:
                 # They haven't filled in the quiz
                 return redirect(url_for('quiz'))
