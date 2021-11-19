@@ -1,8 +1,2114 @@
 {% extends "userLayout.html" %}
 
 {% block title %}
-Chatbot | Doc-on
+Evaluation | Doc-on
 {% endblock %}
 
 {% block body %}
+<h3 class="text-center py-5">
+    Welcome to the test!<br>
+    <small class="text-muted">Be warned: to guarantee maximum accuracy, the quiz is very long.</small>
+</h3>
+<form action="/evaluate" method="post" class="py-4 mx-5">
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience itching?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="itching" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="itching" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience skin rash?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="skin_rash" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="skin_rash" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience nodal skin eruptions?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="nodal_skin_eruptions" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="nodal_skin_eruptions" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience continuous sneezing?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="continuous_sneezing" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="continuous_sneezing" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience shivering?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="shivering" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="shivering" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience chills?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="chills" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="chills" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience joint pain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="joint_pain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="joint_pain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience stomach pain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="stomach_pain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="stomach_pain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience acidity?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="acidity" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="acidity" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience ulcers on tongue?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="ulcers_on_tongue" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="ulcers_on_tongue" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience muscle wasting?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="muscle_wasting" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="muscle_wasting" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience vomiting?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="vomiting" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="vomiting" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience burning micturition?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="burning_micturition" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="burning_micturition" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience spotting urination?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="spotting_urination" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="spotting_urination" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience fatigue?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="fatigue" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="fatigue" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience weight gain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="weight_gain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="weight_gain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience anxiety?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="anxiety" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="anxiety" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience cold hands and feets?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="cold_hands_and_feets" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="cold_hands_and_feets" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience mood swings?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="mood_swings" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="mood_swings" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience weight loss?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="weight_loss" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="weight_loss" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience restlessness?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="restlessness" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="restlessness" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience lethargy?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="lethargy" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="lethargy" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience patches in throat?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="patches_in_throat" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="patches_in_throat" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience irregular sugar level?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="irregular_sugar_level" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="irregular_sugar_level" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience cough?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="cough" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="cough" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience high fever?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="high_fever" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="high_fever" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience sunken eyes?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="sunken_eyes" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="sunken_eyes" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience breathlessness?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="breathlessness" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="breathlessness" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience sweating?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="sweating" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="sweating" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience dehydration?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="dehydration" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="dehydration" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience indigestion?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="indigestion" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="indigestion" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience headache?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="headache" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="headache" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience yellowish skin?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="yellowish_skin" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="yellowish_skin" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience dark urine?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="dark_urine" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="dark_urine" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience nausea?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="nausea" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="nausea" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience loss of appetite?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="loss_of_appetite" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="loss_of_appetite" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience pain behind the eyes?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="pain_behind_the_eyes" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="pain_behind_the_eyes" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience back pain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="back_pain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="back_pain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience constipation?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="constipation" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="constipation" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience abdominal pain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="abdominal_pain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="abdominal_pain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience diarrhoea?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="diarrhoea" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="diarrhoea" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience mild fever?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="mild_fever" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="mild_fever" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience yellow urine?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="yellow_urine" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="yellow_urine" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience yellowing of eyes?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="yellowing_of_eyes" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="yellowing_of_eyes" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience acute liver failure?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="acute_liver_failure" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="acute_liver_failure" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience swelling of stomach?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swelling_of_stomach" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swelling_of_stomach" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience swelled lymph nodes?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swelled_lymph_nodes" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swelled_lymph_nodes" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience malaise?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="malaise" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="malaise" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience blurred and distorted vision?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="blurred_and_distorted_vision" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="blurred_and_distorted_vision" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience phlegm?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="phlegm" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="phlegm" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience throat irritation?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="throat_irritation" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="throat_irritation" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience redness of eyes?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="redness_of_eyes" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="redness_of_eyes" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience sinus pressure?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="sinus_pressure" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="sinus_pressure" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience runny nose?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="runny_nose" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="runny_nose" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience congestion?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="congestion" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="congestion" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience chest pain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="chest_pain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="chest_pain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience weakness in limbs?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="weakness_in_limbs" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="weakness_in_limbs" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience fast heart rate?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="fast_heart_rate" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="fast_heart_rate" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience pain during bowel movements?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="pain_during_bowel_movements" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="pain_during_bowel_movements" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience pain in anal region?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="pain_in_anal_region" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="pain_in_anal_region" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience bloody stool?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="bloody_stool" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="bloody_stool" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience irritation in anus?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="irritation_in_anus" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="irritation_in_anus" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience neck pain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="neck_pain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="neck_pain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience dizziness?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="dizziness" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="dizziness" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience cramps?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="cramps" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="cramps" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience bruising?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="bruising" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="bruising" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience obesity?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="obesity" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="obesity" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience swollen legs?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swollen_legs" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swollen_legs" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience swollen blood vessels?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swollen_blood_vessels" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swollen_blood_vessels" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience puffy face and eyes?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="puffy_face_and_eyes" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="puffy_face_and_eyes" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience enlarged thyroid?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="enlarged_thyroid" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="enlarged_thyroid" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience brittle nails?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="brittle_nails" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="brittle_nails" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience swollen extremeties?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swollen_extremeties" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swollen_extremeties" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience excessive hunger?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="excessive_hunger" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="excessive_hunger" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience extra marital contacts?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="extra_marital_contacts" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="extra_marital_contacts" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience drying and tingling lips?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="drying_and_tingling_lips" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="drying_and_tingling_lips" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience slurred speech?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="slurred_speech" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="slurred_speech" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience knee pain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="knee_pain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="knee_pain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience hip joint pain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="hip_joint_pain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="hip_joint_pain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience muscle weakness?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="muscle_weakness" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="muscle_weakness" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience stiff neck?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="stiff_neck" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="stiff_neck" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience swelling joints?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swelling_joints" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="swelling_joints" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience movement stiffness?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="movement_stiffness" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="movement_stiffness" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience spinning movements?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="spinning_movements" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="spinning_movements" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience loss of balance?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="loss_of_balance" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="loss_of_balance" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience unsteadiness?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="unsteadiness" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="unsteadiness" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience weakness of one body side?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="weakness_of_one_body_side" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="weakness_of_one_body_side" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience loss of smell?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="loss_of_smell" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="loss_of_smell" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience bladder discomfort?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="bladder_discomfort" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="bladder_discomfort" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience foul smell of urine?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="foul_smell_of_urine" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="foul_smell_of_urine" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience continuous feel of urine?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="continuous_feel_of_urine" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="continuous_feel_of_urine" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience passage of gases?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="passage_of_gases" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="passage_of_gases" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience internal itching?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="internal_itching" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="internal_itching" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience toxic look?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="toxic_look" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="toxic_look" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience depression?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="depression" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="depression" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience irritability?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="irritability" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="irritability" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience muscle pain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="muscle_pain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="muscle_pain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience altered sensorium?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="altered_sensorium" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="altered_sensorium" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience red spots over body?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="red_spots_over_body" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="red_spots_over_body" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience belly pain?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="belly_pain" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="belly_pain" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience abnormal menstruation?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="abnormal_menstruation" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="abnormal_menstruation" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience dischromic patches?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="dischromic_patches" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="dischromic_patches" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience watering from eyes?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="watering_from_eyes" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="watering_from_eyes" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience increased appetite?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="increased_appetite" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="increased_appetite" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience polyuria?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="polyuria" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="polyuria" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience family history?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="family_history" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="family_history" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience mucoid sputum?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="mucoid_sputum" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="mucoid_sputum" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience rusty sputum?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="rusty_sputum" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="rusty_sputum" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience lack of concentration?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="lack_of_concentration" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="lack_of_concentration" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience visual disturbances?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="visual_disturbances" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="visual_disturbances" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience receiving blood transfusion?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="receiving_blood_transfusion" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="receiving_blood_transfusion" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience receiving unsterile injections?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="receiving_unsterile_injections" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="receiving_unsterile_injections" value="no"
+                    checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience coma?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="coma" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="coma" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience stomach bleeding?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="stomach_bleeding" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="stomach_bleeding" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience distention of abdomen?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="distention_of_abdomen" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="distention_of_abdomen" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience history of alcohol consumption?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="history_of_alcohol_consumption" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="history_of_alcohol_consumption" value="no"
+                    checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience fluid overload?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="fluid_overload" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="fluid_overload" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience blood in sputum?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="blood_in_sputum" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="blood_in_sputum" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience prominent veins on calf?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="prominent_veins_on_calf" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="prominent_veins_on_calf" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience palpitations?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="palpitations" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="palpitations" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience painful walking?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="painful_walking" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="painful_walking" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience pus filled pimples?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="pus_filled_pimples" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="pus_filled_pimples" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience blackheads?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="blackheads" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="blackheads" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience scurring?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="scurring" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="scurring" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience skin peeling?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="skin_peeling" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="skin_peeling" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience silver like dusting?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="silver_like_dusting" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="silver_like_dusting" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience small dents in nails?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="small_dents_in_nails" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="small_dents_in_nails" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience inflammatory nails?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="inflammatory_nails" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="inflammatory_nails" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience blister?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="blister" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="blister" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience red sore around nose?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="red_sore_around_nose" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="red_sore_around_nose" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-group mx-5 my-4">
+        <legend class="mt-1">Do you experience yellow crust ooze?</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="yellow_crust_ooze" value="yes">
+                Yes
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="yellow_crust_ooze" value="no" checked="">
+                No
+            </label>
+        </div>
+    </fieldset>
+
+    <input name="submit" class="btn btn-primary btn-block my-4 mx-5" type="submit" value="Submit">
+</form>
+
 {% endblock %}
