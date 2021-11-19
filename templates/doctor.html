@@ -26,7 +26,6 @@ Home | Doc-on
                 Take the quiz now!
                 <i class="ms-2 fa fa-arrow-right fa-1x"></i>
             </a>
-            <p>Note: your results won't be saved as you're a doctor.</p>
         </div>
     </div>
     <div class="col-sm-6 col-lg-4 mb-4 mx-auto px-2">
@@ -43,6 +42,12 @@ Home | Doc-on
                 <ul>
                     {% for skill in doctor.skills %}
                     <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+                <h5>Diseases:</h5>
+                <ul>
+                    {% for disease, prob in doctor.diseases.items() %}
+                    <li>{{ disease }} with a {{ prob }}% chance</li>
                     {% endfor %}
                 </ul>
                 {% if doctor.add %}

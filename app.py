@@ -215,10 +215,16 @@ def doctor():
                 with sqlite3.connect('app.db') as con:
                     con.row_factory = sqlite3.Row
                     cur = con.cursor()
-                    cur.execute("SELECT name, email, location, school, education, age, gender, skills, additional, likes, dislikes FROM users WHERE username = (?)", (username,))
+                    cur.execute("SELECT name, email, location, school, education, age, gender, skills, additional, likes, dislikes, diseases FROM users WHERE username = (?)", (username,))
                     rows = cur.fetchall()
 
                 rows = rows[0]
+
+                diseases = rows['diseases']
+                if diseases != None:
+                    diseases = json.loads(diseases)
+                else:
+                    diseases = {'Test not taken yet': '100'}
 
                 skills_un = rows['skills']
                 # Parse
@@ -235,7 +241,8 @@ def doctor():
                     'skills': skills,
                     'add' : rows['additional'],
                     'likes': rows['likes'],
-                    'dislikes' : rows['dislikes']
+                    'dislikes' : rows['dislikes'],
+                    'diseases' : diseases
                 }
 
                 return render_template('doctor.html', doctor=doctor, username=username)
@@ -452,7 +459,8 @@ def evaluate():
             cur = con.cursor()
             cur.execute("UPDATE users SET diseases=(?) WHERE username=(?)", (json.dumps(diseases), username))
             con.commit()
-        return render_template('results.html')
+        flash("Check out possible diseases in your profile!", 'alert alert-dismissible alert-success')
+        return redirect(url_for('login'))
     else:
         if session.get('username'):
             return render_template('evaluate.html')
