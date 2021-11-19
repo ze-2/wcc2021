@@ -1,6 +1,9 @@
 from flask import Flask, flash, redirect, request, render_template, url_for, session
 from flask_sslify import SSLify
 import secrets
+import sqlite3
+import json
+import sys
 
 # Setup
 app = Flask(__name__, static_url_path='/static')
@@ -19,21 +22,49 @@ def login():
         # Login details from user
         username = request.form['username']
         password = request.form['password']
-        # Check with the db here
-        # Get the user's type (doctor or patient here) and redirect to the appropriate page
 
-        # Filler for now
-        type = "patient"
+        # Get the user's type (doctor or patient here) and redirect to the appropriate page
+        with sqlite3.connect('app.db') as con:
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("SELECT type FROM users WHERE username = (?)", (username,))
+            rows = cur.fetchall()
+
+        try:
+            type = rows[0]['type']
+        except IndexError:
+            flash("User doesn't exist - create an account first", 'alert alert-dismissible alert-danger')
+            return redirect(url_for('signup'))
+
+        # Check password
+        with sqlite3.connect('app.db') as con:
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("SELECT password FROM users WHERE username = (?)", (username,))
+            rows = cur.fetchall()
+
+        db_password = rows[0]['password']
 
         # Check if details match
-        check = True
+        if db_password == password:
+            check = True
+        else:
+            check = False
 
         if check:
             if type == "doctor":
                 # Pull from db if the user has confirmed details
+                with sqlite3.connect('app.db') as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT quiz FROM users WHERE username = (?)", (username,))
+                    rows = cur.fetchall()
 
-                # Set the cookie to False if they haven't took the quiz
-                session['details'] = False
+                details = rows[0]['quiz']
+                if details == "true":
+                    session['details'] = True
+                else:
+                    session['details'] = False
 
                 # Set cookies, log in as doctor
                 session['username'] = username
@@ -42,10 +73,18 @@ def login():
                 flash('You are now logged in as a doctor.', 'alert alert-dismissible alert-success')
                 return redirect(url_for('doctor'))
             else:
-                # Pull from db if the user has confirmed details
+                with sqlite3.connect('app.db') as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT quiz FROM users WHERE username = (?)", (username,))
+                    rows = cur.fetchall()
 
-                # Set the cookie to False if they haven't took the quiz
-                session['details'] = True
+                details = rows[0]['quiz']
+
+                if details == "true":
+                    session['details'] = True
+                else:
+                    session['details'] = False
 
                 # Set cookies, log in as patient
                 session['username'] = username
@@ -77,14 +116,27 @@ def signup():
         user_type = request.form['options']
 
         # Check with the db if account exists, if not create account
-        exists = False
-        if (exists):
+        with sqlite3.connect('app.db') as con:
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("SELECT type FROM users WHERE username = (?)", (username,))
+            rows = cur.fetchall()
+
+        if len(rows) != 0:
             flash('Account already exists, choose a different username.', 'alert alert-dismissible alert-danger')
             return redirect(url_for('signup'))
-        else:
-            # Create account with db here
-            flash('Account created! Please log in.', 'alert alert-dismissible alert-success')
-            return redirect(url_for('login'))
+
+        # Create account with db here
+
+        with sqlite3.connect('app.db') as con:
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("INSERT INTO users(username, email, password, type, quiz) VALUES (?, ?, ?, ?, ?)", (username, email, password, user_type, "false"))
+            con.commit()
+
+        flash('Account created! Please log in.', 'alert alert-dismissible alert-success')
+        return redirect(url_for('login'))
+
     else:
         return render_template('signup.html')
 
@@ -98,15 +150,39 @@ def user():
         if session.get('type') == "patient":
             if session.get('details'):
                 # Get patient details from db
+                with sqlite3.connect('app.db') as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT name, email, location, age, gender, diseases, additional FROM users WHERE username = (?)", (username,))
+                    rows = cur.fetchall()
+
+                rows = rows[0]
+
+                diseases = rows['diseases']
+                if diseases != None:
+                    diseases = json.loads(diseases)
+                else:
+                    diseases = {'Test not taken yet': '100'}
+
                 patient ={
-                    'name': 'John',
-                    'email': 'john@email.com',
-                    'location': 'tokyo',
-                    'age': '25',
-                    'gender': 'male',
-                    'diseases': {'common flu': '90', 'cancer': '30'},
-                    'add' : 'whatever they wanna add'
-                    }
+                    'name': rows['name'],
+                    'email': rows['email'],
+                    'location': rows['location'],
+                    'age': rows['age'],
+                    'gender': rows['gender'],
+                    'diseases': diseases,
+                    'add': rows['additional']
+                }
+
+                # patient ={
+                #     'name': 'John',
+                #     'email': 'john@email.com',
+                #     'location': 'tokyo',
+                #     'age': '25',
+                #     'gender': 'male',
+                #     'diseases': {'common flu': '90', 'cancer': '30'},
+                #     'add' : 'whatever they wanna add'
+                #     }
                 return render_template('user.html', username=username, patient=patient)
             else:
                 # They haven't filled in the quiz
@@ -129,21 +205,35 @@ def doctor():
         username = session['username']
         if session.get('type') == "doctor":
             if session.get('details'):
+
+                with sqlite3.connect('app.db') as con:
+                    con.row_factory = sqlite3.Row
+                    cur = con.cursor()
+                    cur.execute("SELECT name, email, location, school, education, age, gender, skills, additional, likes, dislikes FROM users WHERE username = (?)", (username,))
+                    rows = cur.fetchall()
+
+                rows = rows[0]
+
+                skills_un = rows['skills']
+                # Parse
+                skills = skills_un.split(",")
+
                 doctor = {
-                    'name': 'Dr. Smith',
-                    'email': 'smith@email.com',
-                    'location': 'Tokyo',
-                    'school': 'school A',
-                    'education': "Master's",
-                    'age': '25',
-                    'gender': 'male',
-                    'skills': ['neurologist'],
-                    'add' : 'additional info they handed up',
-                    'likes': '4',
-                    'dislikes' : '0'}
+                    'name': rows['name'],
+                    'email': rows['email'],
+                    'location': rows['location'],
+                    'school': rows['school'],
+                    'education': rows['education'],
+                    'age': rows['age'],
+                    'gender': rows['gender'],
+                    'skills': skills,
+                    'add' : rows['additional'],
+                    'likes': rows['likes'],
+                    'dislikes' : rows['dislikes']
+                }
+
                 return render_template('doctor.html', doctor=doctor, username=username)
             else:
-                # They haven't filled in the quiz
                 return redirect(url_for('quiz'))
         else:
             # Somehow user got to doctor page
@@ -158,7 +248,6 @@ def doctor():
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
     if request.method == 'POST':
-        # Update db where username = ...
         if session.get('type') == "doctor":
             username = session.get('username')
 
@@ -169,16 +258,17 @@ def quiz():
             gender = request.form['gender']
             add = request.form['add']
 
-            skills_unparsed = request.form['skills']
-            # Parse array for db - not very sure if this works, but it should be an array now
-            skills = skills_unparsed.split(",")
+            skills = request.form['skills']
 
-            # For this I'll need you to store the results in full form - parse it
-            # Refer to doctor_quiz page for the values and what they correspond with
             education = request.form['education']
 
-            # Update db to say that they've filled in the quiz
             session['details'] = True
+
+            with sqlite3.connect('app.db') as con:
+                con.row_factory = sqlite3.Row
+                cur = con.cursor()
+                cur.execute("UPDATE users SET name=(?), location=(?), school=(?), age=(?), gender=(?), additional=(?), skills=(?), education=(?), quiz=(?) WHERE username=(?)", (name, location, school, age, gender, add, skills, education, "true", username))
+                con.commit()
 
             flash('Thank you!', 'alert alert-dismissible alert-success')
             return redirect(url_for('doctor'))
@@ -190,7 +280,12 @@ def quiz():
             gender = request.form['gender']
             add = request.form['add']
 
-            # Update db to say that they've filled in the quiz
+            with sqlite3.connect('app.db') as con:
+                con.row_factory = sqlite3.Row
+                cur = con.cursor()
+                cur.execute("UPDATE users SET name=(?), location=(?), age=(?), gender=(?), additional=(?), quiz=(?) WHERE username=(?)", (name, location, age, gender, add, "true", username))
+                con.commit()
+
             session['details'] = True
 
             flash('Thank you!', 'alert alert-dismissible alert-success')
@@ -204,106 +299,101 @@ def quiz():
             return render_template('patient_quiz.html')
 
 # Chatbot / quiz things
-# Pass final results in a list of dicts
-# Eg. diseases = [{'disease': 'flu', 'score': '100'}, {'disease': 'cancer', 'score': '50'}]
+# Pass final results in a dict
+# Eg. diseases = {'common flu': '90', 'cancer': '30'}
 @app.route('/evaluate', methods =["GET", "POST"])
 def evaluate():
     if request.method == "POST":
-        # Add their likely dieases to the db
+        username = session.get('username')
+        # Add their likely diseases to the db
+        diseases = {'common flu': '90', 'cancer': '30'}
+        with sqlite3.connect('app.db') as con:
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("UPDATE users SET diseases=(?) WHERE username=(?)", (json.dumps(diseases), username))
+            con.commit()
         return render_template('results.html')
     else:
-        return render_template('evaluate.html')
+        if session.get('username'):
+            return render_template('evaluate.html')
+        else:
+            # Haven't logged in
+            flash('Log in first', 'alert alert-dismissible alert-danger')
+            return redirect(url_for('login'))
 
 # Contains the doctors so the users can see who is available
 # Pass results in a list of dicts
-""" Eg.
-doctors =[
-{
-    'name': 'Dr. Smith',
-    'email': 'smith@email.com',
-    'location': 'tokyo',
-    'school': 'school A',
-    'education': "Master's" OR "Doctorate's / Higher" OR "Bachelor's" OR "High School" OR "Vocational"
-    'age': '25',
-    'gender': 'male', OR 'female' OR 'others'
-    'skills': ['neurologist'],
-    'likes': '4',
-    'dislikes' : '0',
-    'add' : 'any additional info they sent' (optional)
-},{
-    (second and other entries in the format above)
-}
-]"""
-
-
 @app.route('/doctors', methods=['GET', 'POST'])
 def doctors():
     if request.method == 'POST':
-        search = request.form['search']
+        search_un = request.form['search']
         # Get the doctors from the db where criteria meets search
-        # Filler
-        doctors =[{
-        'name': 'Dr. Smith',
-        'email': 'smith@email.com',
-        'location': 'Tokyo',
-        'school': 'school A',
-        'education': "Master's",
-        'age': '25',
-        'gender': 'male',
-        'skills': ['neurologist'],
-        'add' : 'additional info they handed up',
-        'likes': '4',
-        'dislikes' : '0'}]
+        with sqlite3.connect('app.db') as con:
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            search = '%'+search_un+'%'
+            cur.execute("SELECT name, email, location, school, education, age, gender, skills, additional, likes, dislikes FROM users WHERE name LIKE (?) OR school LIKE (?) OR education LIKE (?) OR gender LIKE (?) OR skills LIKE (?) OR additional LIKE (?) OR username LIKE (?)", (search, search, search, search, search, search, search))
+            rows = cur.fetchall()
 
-        return render_template('doctors.html', doctors=doctors, search=search)
+        doctors = []
+
+        for row in rows:
+            skills_un = row['skills']
+            # Parse
+            skills = skills_un.split(",")
+            doctor = {
+                'name': row['name'],
+                'email': row['email'],
+                'location': row['location'],
+                'school': row['school'],
+                'education': row['education'],
+                'age': row['age'],
+                'gender': row['gender'],
+                'skills': skills,
+                'add' : row['additional'],
+                'likes': row['likes'],
+                'dislikes' : row['dislikes']
+            }
+            doctors.append(doctor)
+
+
+        return render_template('doctors.html', doctors=doctors, search=search_un)
     else:
         # Filler for now
-        doctors =[{
-        'name': 'Dr. Smith',
-        'email': 'smith@email.com',
-        'location': 'Tokyo',
-        'school': 'school A',
-        'education': "Master's",
-        'age': '25',
-        'gender': 'male',
-        'skills': ['neurologist'],
-            'add' : 'additional info they handed up',
+        doctors =[]
 
-        'likes': '4',
-        'dislikes' : '0'
-    },{
-        'name': 'Dr. Jones',
-        'email': 'jones@email.com',
-        'location': 'Malaysia',
-        'school': 'schoolB',
-        'education': "Doctorate's",
-        'age': '25',
-        'gender': 'others',
-        'skills': ['general practitioner', 'allergist'],
-        'likes': '1000',
-        'dislikes' : '20'
-    },{
-        'name': 'Dr. Jane',
-        'email': 'jane@email.com',
-        'location': 'Singapore',
-        'school': 'school C',
-        'education': "Bachelor's",
-        'age': '25',
-        'gender': 'female',
-        'skills': ['general practitioner', 'nutrition', 'cancer'],
-        'likes': '90',
-        'add' : 'whatever they wanna add',
-        'dislikes' : '1'
-    }]
+        with sqlite3.connect('app.db') as con:
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("SELECT name, email, location, school, education, age, gender, skills, additional, likes, dislikes FROM users WHERE type=(?)", ("doctor",))
+            rows = cur.fetchall()
+
+        for row in rows:
+            skills_un = row['skills']
+            # Parse
+            skills = skills_un.split(",")
+            doctor = {
+                'name': row['name'],
+                'email': row['email'],
+                'location': row['location'],
+                'school': row['school'],
+                'education': row['education'],
+                'age': row['age'],
+                'gender': row['gender'],
+                'skills': skills,
+                'add' : row['additional'],
+                'likes': row['likes'],
+                'dislikes' : row['dislikes']
+            }
+            doctors.append(doctor)
+
         return render_template('doctors.html', doctors=doctors)
 
 @app.route('/patients', methods=['GET', 'POST'])
 def patients():
     if request.method == 'POST':
         search = request.form['search']
-        # Get the doctors from the db where criteria meets search
-        # Filler
-
+        # Get the patients from the db where criteria meets search
         patients =[{
         'name': 'John',
         'email': 'john@email.com',
@@ -316,25 +406,34 @@ def patients():
 
         return render_template('patients.html', patients=patients, search=search)
     else:
-    # Filler for now
-        patients = [{
-        'name': 'John',
-        'email': 'john@email.com',
-        'location': 'tokyo',
-        'age': '25',
-        'gender': 'male',
-        'diseases': {'common flu': '90', 'cancer': '30'},
-        'add' : 'whatever they wanna add'
-    },{
-        'name': 'Jane',
-        'email': 'doe@email.com',
-        'location': 'malaysia',
-        'age': '70',
-        'gender': 'female',
-        'diseases': {'stroke': '90', 'diabetes (type 2)': '30'},
-        'add' : 'some extra stuff here (optional)'
-    }]
-        # Need to get patients from db here in the format above
+        patients =[]
+
+        # Get patient details from db
+        with sqlite3.connect('app.db') as con:
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("SELECT name, email, location, age, gender, diseases, additional FROM users WHERE type=(?)", ("patient",))
+            rows = cur.fetchall()
+
+        for row in rows:
+            diseases = row['diseases']
+            if diseases != None:
+                diseases = json.loads(diseases)
+            else:
+                diseases = {'Test not taken yet': '100'}
+
+            patient ={
+                'name': row['name'],
+                'email': row['email'],
+                'location': row['location'],
+                'age': row['age'],
+                'gender': row['gender'],
+                'diseases': diseases,
+                'add': row['additional']
+            }
+
+            patients.append(patient)
+
         return render_template('patients.html', patients=patients)
 
 
