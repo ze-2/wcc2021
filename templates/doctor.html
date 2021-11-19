@@ -37,6 +37,8 @@ Home | Doc-on
                 <h4>Age: {{ doctor.age }}</h4>
                 <h4>Location: {{ doctor.location }}</h4>
                 <h4>Gender: {{doctor.gender}} </h4>
+                <h5>School: {{doctor.school}}</h5>
+                <h5>Education level: {{doctor.education}}</h5>
                 <h5>Skills:</h5>
                 <ul>
                     {% for skill in doctor.skills %}
@@ -46,7 +48,6 @@ Home | Doc-on
                 {% if doctor.add %}
                 <p class="card-text">Additional info:<br>{{ doctor.add }}</p>
                 {% endif %}
-                <p class="card-text">Disclaimer: this is NOT meant to be an official diagnosis.</p>
                 <p class="card-text">Email: {{doctor.email}}</p>
                 <a type="button" class="btn btn-primary" href="{{ url_for('quiz') }}">Wrong details?</a>
             </div>
