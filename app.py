@@ -97,6 +97,11 @@ def login():
             return redirect(url_for('login'))
 
     else:
+        if session.get('username'):
+            if session.get('type') == "doctor":
+                return redirect(url_for('doctor'))
+            else:
+                return redirect(url_for('user'))
         return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -452,7 +457,7 @@ def evaluate():
         if session.get('type') == "doctor":
             return redirect(url_for('doctor'))
         else:
-            return redirect(url_for('user'))
+            return redirect(url_for('patient'))
     else:
         if session.get('username'):
             return render_template('evaluate.html')
@@ -582,13 +587,6 @@ def logout():
     # Remove cookies
     session.pop('username', None)
     return redirect(url_for('index'))
-
-@app.route('/home')
-def home():
-    if session.get('type') == "doctor":
-        return redirect(url_for('doctor'))
-    else:
-        return redirect(url_for('user'))
 
 if __name__ == "__main__":
     app.run()
