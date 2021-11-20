@@ -97,11 +97,6 @@ def login():
             return redirect(url_for('login'))
 
     else:
-        if session.get('username'):
-            if session.get('type') == "doctor":
-                return redirect(url_for('doctor'))
-            else:
-                return redirect(url_for('user'))
         return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
