@@ -4,6 +4,6 @@ def predict(*data):
     diseases = {}
     for i in range(5):
         r = random.randint(0, 100)
-        diseases[diseases_list[i]] = r
+        diseases[diseases_list[r]] = r
 
     return diseases
