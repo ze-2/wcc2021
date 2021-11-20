@@ -102,7 +102,8 @@ def login():
                 return redirect(url_for('doctor'))
             else:
                 return redirect(url_for('user'))
-        return render_template('login.html')
+        else:
+            return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
